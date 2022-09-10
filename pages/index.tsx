@@ -1,7 +1,8 @@
 import React from "react";
+import { ReduxCRUD } from "../src/pages/ReduxCRUD";
 
 const index = () => {
-  return <div>redux toolkit crud</div>;
+  return <ReduxCRUD />;
 };
 
 export default index;
