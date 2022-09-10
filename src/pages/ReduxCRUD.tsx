@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { addTodo, ITodo, removeTodo, updateTodo } from "../store/todoSlice";
+import {
+  addTodo,
+  ITodo,
+  removeTodo,
+  toggleCompleTodo,
+} from "../store/todoSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 
@@ -22,7 +27,6 @@ export const ReduxCRUD = () => {
   );
 
   const handleAddTodo = () => {
-    if (!currentTodo.title) return;
     dispatch(addTodo({ ...currentTodo, id: createUniqueID() }));
     setCurrentTodo(currentTodoInitialState);
   };
@@ -31,8 +35,8 @@ export const ReduxCRUD = () => {
     dispatch(removeTodo(todo));
   };
 
-  const handleUpdateTodo = (todo: ITodo) => {
-    dispatch(updateTodo(todo));
+  const handleToggleTodo = (todo: ITodo) => {
+    dispatch(toggleCompleTodo(todo));
   };
 
   return (
@@ -51,7 +55,7 @@ export const ReduxCRUD = () => {
         {todos.todos.map((todo) => (
           <li key={todo.id} style={{ display: "flex", width: "full" }}>
             <p>{todo.title}</p>
-            <button onClick={() => handleUpdateTodo(todo)}>
+            <button onClick={() => handleToggleTodo(todo)}>
               {todo.isCompleted ? "Não completo" : "Completo"}
             </button>
             <button onClick={() => handleRemoveTodo(todo)}>Remover</button>
